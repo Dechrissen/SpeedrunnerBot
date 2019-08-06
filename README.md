@@ -38,7 +38,7 @@ A basic bot for Twitch with speedrunner-specific functionality, written in Pytho
 #### After creating a separate Twitch account for the bot to control, follow these steps:
 1. Install the latest version of Python 3 ([here](https://www.python.org/downloads/))
 2. Using **pip**, install the Python package *pytz*: `pip install pytz` or read more [here](https://pypi.org/project/pytz/)
-3. In the *settings.py* file, enter the required information in the following fields:
+3. Download the contents of the [bot](/bot) folder to your comupter. In the *settings.py* file, enter the required information in the following fields:
     - **PASS**: *the oauth token for the Twitch account that will be controlled by the bot — get one [here](https://twitchapps.com/tmi/) while logged into the bot's Twitch account*
     - **IDENT**: *the username of the Twitch account that will be controlled by the bot*
     - **CHANNEL**: *the channel owner's Twitch username*
