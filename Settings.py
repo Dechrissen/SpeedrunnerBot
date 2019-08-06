@@ -1,0 +1,10 @@
+HOST = "irc.twitch.tv"
+PORT = 6667
+PASS = "oauth:123456789" #The oauth token for the bot account (the whole thing, including "oauth:")
+IDENT = "bot_username" #The username of the bot's Twitch account (lowercase)
+CHANNEL = "channel_owner_username" #The username of your Twitch account (lowercase)
+COOLDOWN = 10 #Global cooldown for commands (in seconds)
+CHANNELPASS = "oauth:123456789" #The oauth token for the channel owner's Twitch account (the whole thing, including "oauth:")
+SRC_USERNAME = CHANNEL #If your Speedrun.com username is different from your Twitch username, change CHANNEL to your Speedrun.com username (within quotes and lowercase)
+GAMES = [['Sample Game', 'sg'], ['Sample Game 2', 'sg2']]
+CATEGORIES = [['Sample Category 1', 'sample_1'], ['Sample Category 2', 'sample_2']]
