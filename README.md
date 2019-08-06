@@ -7,9 +7,9 @@ A basic bot for Twitch with speedrunner-specific functionality and Speedrun.com 
 3. [How to Use the Bot](#how-to-use-the-bot)
 
 ## What Can This Bot Do?
-- Create a [multitwitch.tv](http://multitwitch.tv/) race link with you and other speedrunners (if you are currently racing)
 - Tell a user the world record for the game & category you are running
 - Tell a user your personal best time for the game & category you are running
+- Create a [multitwitch.tv](http://multitwitch.tv/) race link with you and other speedrunners (if you are currently racing)
 - Tell a user the stream uptime
 - Tell a user how long they have been following you
 - Add/delete basic text commands via Twitch chat
