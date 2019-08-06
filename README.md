@@ -1,5 +1,5 @@
 # Twitch-Speedrunner-Bot
-A basic bot for Twitch with speedrunner-specific functionality.
+A basic bot for Twitch with speedrunner-specific functionality, written in Python.
 
 ## Index
 1. [What Can This Bot Do?](#what-can-this-bot-do)
