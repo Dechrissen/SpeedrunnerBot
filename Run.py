@@ -370,9 +370,6 @@ readbuffer = ""
 
 while True:
 
-    discordTimer(time.time())
-    pointTimer(time.time())
-
     readbuffer = s.recv(1024)
     readbuffer = readbuffer.decode()
     temp = readbuffer.split("\n")
