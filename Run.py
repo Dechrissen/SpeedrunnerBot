@@ -346,7 +346,7 @@ def cooldown():
                 break
 
 
-#Checks to see if a message is from Twitch or a user
+#Checks if a message is from Twitch or a user
 def Console(line):
     if "PRIVMSG" in line:
         return False
@@ -368,7 +368,6 @@ s = openSocket()
 joinRoom(s)
 readbuffer = ""
 
-#Loop that keeps the chat active
 while True:
 
     discordTimer(time.time())
@@ -383,18 +382,15 @@ while True:
 
     for line in temp:
         print(line)
-        #Prevents afk kick from Twitch server
         if "PING" in line and Console(line):
             msgg = "PONG tmi.twitch.tv\r\n".encode()
             s.send(msgg)
             print(msgg)
             break
-        #Prints chat lines (in the console) in a more readable fashion
         user = getUser(line)
         message = getMessage(line)
         print(user + " said: " + message)
 
-        #List of chatters, moderators and VIPs
         response = urlopen('https://tmi.twitch.tv/group/user/{}/chatters'.format(CHANNEL))
         readable = response.read().decode('utf-8')
         chatlist = loads(readable)
@@ -403,7 +399,6 @@ while True:
         vips = chatters['vips']
         viewers = chatters['viewers']
 
-        #Makes dictionary of commands from commands.txt
         commands = {}
         listCommand = []
         commandFile = open("commands.txt", "r")
@@ -417,13 +412,11 @@ while True:
                 sendMessage(s, "Error: Invalid command in commands file")
                 cooldown()
 
-        #Loops commands dictionary through basicCommand function and creates a list of commands
         for input, output in commands.items():
             basicCommand(input, output)
             listCommand.append(input)
 
 
-        #Add command functions below
         getCommands('!commands')
         addCommand('!add')
         deleteCommand('!delete')
