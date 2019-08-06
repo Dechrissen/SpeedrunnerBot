@@ -1,5 +1,5 @@
 # Twitch-Speedrunner-Bot
-A basic bot for Twitch with speedrunner-specific functionality, written in Python.
+A basic bot for Twitch with speedrunner-specific functionality and Speedrun.com API integration, written in Python.
 
 ## Index
 1. [What Can This Bot Do?](#what-can-this-bot-do)
@@ -38,7 +38,7 @@ A basic bot for Twitch with speedrunner-specific functionality, written in Pytho
 #### After creating a separate Twitch account for the bot to control, follow these steps:
 1. Install the latest version of Python 3 ([here](https://www.python.org/downloads/))
 2. Using **pip**, install the Python package *pytz*: `pip install pytz` or read more [here](https://pypi.org/project/pytz/)
-3. Download the contents of the [bot](/bot) folder to your comupter. In the *settings.py* file, enter the required information in the following fields:
+3. Download the contents of the [bot](/bot) folder to your comupter. In the *Settings.py* file, enter the required information in the following fields:
     - **PASS**: *the oauth token for the Twitch account that will be controlled by the bot — get one [here](https://twitchapps.com/tmi/) while logged into the bot's Twitch account*
     - **IDENT**: *the username of the Twitch account that will be controlled by the bot*
     - **CHANNEL**: *the channel owner's Twitch username*
@@ -47,4 +47,4 @@ A basic bot for Twitch with speedrunner-specific functionality, written in Pytho
     ![game code example](images/game%20code.PNG)
     - **CATEGORIES**: *Add, as a Python list, the categorie(s) of all the games you speedrun to this list. If you only run one category, it should be a list with only one list inside. For each category's list, the first element should be the name of the category exactly how you'd type it in your stream title. The second element should be the code for that category that Speedrun.com uses in the hyperlinks for that category. For example, Any% is usually 'Any' and 100% is usually '100'*:
     ![category code example](images/category%20code.PNG)
-4. Run the *run.py* file, and the bot will join your channel via the Twitch account you created for it, ready to be used!
+4. Run the *Run.py* file, and the bot will join your channel via the Twitch account you created for it, ready to be used!
