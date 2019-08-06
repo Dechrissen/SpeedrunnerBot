@@ -15,23 +15,23 @@ A basic bot for Twitch with speedrunner-specific functionality, written in Pytho
 - Add/delete basic text commands via Twitch chat
 
 ## Bot Commands
-- `!wr`
+- `!wr` (everyone)
     - Returns the world record (time and runner) for the game & category specified in your stream title. Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
-- `!pb`
+- `!pb` (everyone)
     - Returns your personal best (time and leaderboard standing) for the game & category specified in your stream title. Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
-- `!race`
+- `!race` (everyone)
     - Creates a [multitwitch.tv](http://multitwitch.tv/) link with you and your opponents' streams (if you are currently racing).
-- `!uptime`
+- `!uptime` (everyone)
     - Returns the duration the stream has been live for. Data is taken from the Twitch API in realtime.
-- `!followage [optional_user]`
+- `!followage [optional_user]` (everyone)
     - Returns the amount of time the user has been following the channel owner. If the optional argument is specified, it will return the follow age for that user instead. Data is taken from the [newtimenow.com](http://api.newtimenow.com/) API in realtime.
-- `!add <command_name> <command_text>`
-    - Adds a simple text command to the commands file. Command names are case sensitive.
-- `!delete <command_name>`
-    - Deletes the specified command from the commands file. Command names are case sensitive.
-- `!commands`
+- `!add <command_name> <command_text>` (channel owner & moderators only)
+    - Adds a simple text command to the commands file. Command names are case sensitive. Commands can also be added manually to the *commands.txt* file, following the semicolon-separated format shown in the sample command.
+- `!delete <command_name>` (channel owner only)
+    - Deletes the specified command from the commands file. Command names are case sensitive. Commands can also be deleted manually from the *commands.txt* file.
+- `!commands` (everyone)
     - Returns a list of bot commands.
-- `!kill`
+- `!kill` (channel owner only)
     - Quits the bot program.
     
 ## How to Use the Bot
