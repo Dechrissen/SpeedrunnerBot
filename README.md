@@ -1,4 +1,4 @@
-# Twitch-Speedrunner-Bot
+# Twitch Speedrunner Bot
 A basic bot for Twitch with speedrunner-specific functionality and Speedrun.com API integration, written in Python.
 
 ## Index
