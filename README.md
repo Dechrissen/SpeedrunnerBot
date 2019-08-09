@@ -40,7 +40,8 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
 #### After creating a separate Twitch account for the bot to control, follow these steps:
 1. Install the latest version of Python 3 ([here](https://www.python.org/downloads/))
 2. Using **pip**, install the Python package *pytz*: `pip install pytz` or read more [here](https://pypi.org/project/pytz/)
-3. Download the contents of the [bot](/bot) folder to your comupter. In the *Settings.py* file, enter the required information in the following fields:
+3. Download the contents of the [bot](/bot) folder to your comupter. In the *Settings.py* file, enter the required information in the following fields under `# Channel owner settings`:
+    - **SRC_USERNAME**: If your Speedrun.com username is different from your Twitch username, change this to your Speedrun.com username (within quotes and lowercase). Otherwise, leave this unchanged.
     - **CHANNEL**: *the channel owner's Twitch username*
     - **CHANNELPASS**: *the oauth token for the channel owner's Twitch account — get one [here](https://twitchapps.com/tmi/) while logged into the channel owner's Twitch account*
     - **GAMES**: *Add, as a Python list, the game(s) you speedrun to this list. If you only speedrun one game, it should be a list with only one list inside. For each game's list, the first element should be the name of the game exactly how you'd type it in your stream title. The second element should be the code for the game that Speedrun.com uses in the hyperlink for that game's page. For example, Banjo-Tooie is 'bt'*:
@@ -49,7 +50,7 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
     ![category code example](images/category%20code.PNG)
 
 ### (Optional) If you want the bot to control a Twitch account other than Speedrunner_Bot:
-- In the *Settings.py* file, also edit these two fields:
+- In the *Settings.py* file, also edit these two fields under `# Bot settings`:
     - **PASS**: *the oauth token for the Twitch account that will be controlled by the bot — get one [here](https://twitchapps.com/tmi/) while logged into the bot's Twitch account*
     - **IDENT**: *the username of the Twitch account that will be controlled by the bot*
 
