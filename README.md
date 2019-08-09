@@ -50,7 +50,7 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
     ![category code example](images/category%20code.PNG)
 
 ### (Optional) If you want the bot to control a Twitch account other than Speedrunner_Bot:
-- In the *Settings.py* file, also edit these two fields under `# Bot settings`:
+- In the *Settings.py* file, also edit these two fields under `# Bot account settings`:
     - **PASS**: *the oauth token for the Twitch account that will be controlled by the bot — get one [here](https://twitchapps.com/tmi/) while logged into the bot's Twitch account*
     - **IDENT**: *the username of the Twitch account that will be controlled by the bot*
 
