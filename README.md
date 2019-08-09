@@ -11,7 +11,7 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
 ## What Can This Bot Do?
 - Tell a user the world record for the game & category you are running
 - Tell a user your personal best time for the game & category you are running
-- Create a [multitwitch.tv](http://multitwitch.tv/) race link with you and other speedrunners (if you are currently racing)
+- Create a [kadgar.net](http://kadgar.net) race link with you and other speedrunners (if you are currently racing)
 - Tell a user the stream uptime
 - Tell a user how long they have been following you
 - Add/delete basic text commands via Twitch chat
@@ -22,7 +22,7 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
 - `!pb` (everyone)
     - Returns your personal best (time and leaderboard standing) for the game & category specified in your stream title. Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
 - `!race` (everyone)
-    - Creates a [multitwitch.tv](http://multitwitch.tv/) link with you and your opponents' streams (if you are currently racing).
+    - Creates a [kadgar.net](http://kadgar.net) link with you and your opponents' streams (if you are currently racing).
 - `!uptime` (everyone)
     - Returns the duration the stream has been live for. Data is taken from the Twitch API in realtime.
 - `!followage [optional_user]` (everyone)
