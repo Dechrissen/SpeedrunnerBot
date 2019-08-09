@@ -8,8 +8,8 @@ PASS = "oauth:mojcw75qjxkqm96ylhru4xdij6bgt9"
 IDENT = "speedrunner_bot"
 
 # Channel owner settings
-SRC_USERNAME = CHANNEL
 CHANNEL = "channel_owner_username" #The username of your Twitch account (lowercase)
 CHANNELPASS = "oauth:123456789" #The oauth token for the channel owner's Twitch account (the whole thing, including "oauth:")
 GAMES = [['Sample Game', 'sg'], ['Sample Game 2', 'sg2']]
 CATEGORIES = [['Sample Category 1', 'sample_1'], ['Sample Category 2', 'sample_2']]
+SRC_USERNAME = CHANNEL
