@@ -137,7 +137,12 @@ def followAge(input):
 def upTime(input):
     if input == message.lower().strip():
         #Get the uptime from the Twitch API
-        response = urlopen('https://api.twitch.tv/kraken/streams/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        try:
+            response = urlopen('https://api.twitch.tv/kraken/streams/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        except urllib.error.HTTPError as err:
+            sendMessage(s, "Error: Invalid CHANNEL/CHANNELPASS in settings file")
+            cooldown()
+            return
         readable = response.read().decode('utf-8')
         stream_info = loads(readable)
         stream = stream_info["stream"]
@@ -174,7 +179,12 @@ def upTime(input):
 def worldRecord(input):
     if input == message.lower().strip():
         #Get the stream title from the Twitch API
-        response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        try:
+            response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        except urllib.error.HTTPError as err:
+            sendMessage(s, "Error: Invalid CHANNEL/CHANNELPASS in settings file")
+            cooldown()
+            return
         readable = response.read().decode('utf-8')
         lst = loads(readable)
         title = lst['status'].lower()
@@ -228,7 +238,12 @@ def worldRecord(input):
 def personalBest(input):
     if input == message.lower().strip():
         #Get the stream title from the Twitch API
-        response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        try:
+            response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        except urllib.error.HTTPError as err:
+            sendMessage(s, "Error: Invalid CHANNEL/CHANNELPASS in settings file")
+            cooldown()
+            return
         readable = response.read().decode('utf-8')
         lst = loads(readable)
         title = lst['status'].lower()
@@ -297,7 +312,12 @@ def personalBest(input):
 def raceCommand(input):
     if input == message.lower().strip():
         #Get the stream title from the Twitch API
-        response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        try:
+            response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        except urllib.error.HTTPError as err:
+            sendMessage(s, "Error: Invalid CHANNEL/CHANNELPASS in settings file")
+            cooldown()
+            return
         readable = response.read().decode('utf-8')
         lst = loads(readable)
         title = lst['status'].lower()
@@ -322,14 +342,14 @@ def raceCommand(input):
                 break
 
 
-        sendMessage(s, "Race link: multitwitch.tv/" + CHANNEL + "/" + "/".join(contenders))
+        sendMessage(s, "Race link: http://kadgar.net/live" + CHANNEL + "/" + "/".join(contenders))
         cooldown()
 
 
 #Displays commands
 def getCommands(input):
     if input == message.strip().lower():
-        sendMessage(s, '!followage • !uptime • !wr • !pb • !race • '+' • '.join(listCommand))
+        sendMessage(s, 'Commands: !followage • !uptime • !wr • !pb • !race • '+' • '.join(listCommand))
         cooldown()
 
 
