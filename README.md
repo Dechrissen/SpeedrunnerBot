@@ -41,13 +41,13 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
 1. Install the latest version of Python 3 ([here](https://www.python.org/downloads/))
 2. Using **pip**, install the Python package *pytz*: `pip install pytz` or read more [here](https://pypi.org/project/pytz/)
 3. Download the contents of the [bot](/bot) folder to your comupter. In the *Settings.py* file, enter the required information in the following fields under `# Channel owner settings`:
-    - **CHANNEL**: *the channel owner's Twitch username*
-    - **CHANNELPASS**: *the oauth token for the channel owner's Twitch account — get one [here](https://twitchapps.com/tmi/) while logged into the channel owner's Twitch account*
+    - **CHANNEL**: *The channel owner's Twitch username.*
+    - **CHANNELPASS**: *The oauth token for the channel owner's Twitch account — get one [here](https://twitchapps.com/tmi/) while logged into the channel owner's Twitch account.*
     - **GAMES**: *Add, as a Python list, the game(s) you speedrun to this list. If you only speedrun one game, it should be a list with only one list inside. For each game's list, the first element should be the name of the game exactly how you'd type it in your stream title. The second element should be the code for the game that Speedrun.com uses in the hyperlink for that game's page. For example, Banjo-Tooie is 'bt'*:  
     ![game code example](images/game%20code.PNG)
     - **CATEGORIES**: *Add, as a Python list, the categorie(s) of all the games you speedrun to this list. If you only run one category, it should be a list with only one list inside. For each category's list, the first element should be the name of the category exactly how you'd type it in your stream title. The second element should be the code for that category that Speedrun.com uses in the hyperlinks for that category. For example, Any% is usually 'Any' and 100% is usually '100'*:  
     ![category code example](images/category%20code.PNG)
-     - **SRC_USERNAME**: If your Speedrun.com username is different from your Twitch username, change this to your Speedrun.com username (within quotes and lowercase). Otherwise, leave this unchanged.
+     - **SRC_USERNAME**: *If your Speedrun.com username is different from your Twitch username, change this to your Speedrun.com username (within quotes and lowercase). Otherwise, leave this unchanged.*
 
 ### (Optional) If you want the bot to control a Twitch account other than Speedrunner_Bot:
 - In the *Settings.py* file, also edit these two fields under `# Bot account settings`:
