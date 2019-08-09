@@ -55,7 +55,7 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
     - **IDENT**: *the username of the Twitch account that will be controlled by the bot*
 
 ## How to Run the Bot
-Run the *Run.py* file every time you stream, and the bot will join your channel, ready to be used! 
+Run the *Run.py* file every time you stream and the bot will join your channel, ready to be used! 
   
 Note: *It is recommended that you make Speedrunner_Bot a moderator in your channel, so that it isn't accidentally timed out/banned/etc. by other bots and/or moderators.*
 
