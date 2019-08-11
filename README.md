@@ -5,14 +5,11 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
 ### Before reading this document!
 Since different people have different needs, there are two versions of this bot. Please decide which one you will want to use before continuing, and then download the appropriate folder before setting up the bot in [Step 3](#how-to-set-up-the-bot).  
 
-**Version 1**
-*A more complete Twitch.tv bot with speedrunner-specific functionality in addition to essential bot features, like simple text commands, uptime, and followage. This bot is intended to replace other bots like Nightbot.*  
+**Version 1**: *A more complete Twitch.tv bot with speedrunner-specific functionality in addition to essential bot features, like simple text commands, uptime, and followage. This bot is intended to replace other bots like Nightbot.*  
 
 Version 1 folder: [bot](/bot)
   
-**Version 2**  
-
-*A version of the bot that has only speedrunner-specific functionality. This bot is intended to supplement bots like Nightbot.*  
+**Version 2**: *A version of the bot that has only speedrunner-specific functionality. This bot is intended to supplement bots like Nightbot.*  
 
 Version 2 folder: [bot_v2](/bot_v2)
 
