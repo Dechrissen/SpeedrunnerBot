@@ -308,7 +308,7 @@ def personalBest(input):
             return
 
 
-#Returns a multitwitch.tv link with the channel owner and the other racers if a race is happening
+#Returns a kadgar.net link with the channel owner and the other racers if a race is happening
 def raceCommand(input):
     if input == message.lower().strip():
         #Get the stream title from the Twitch API
