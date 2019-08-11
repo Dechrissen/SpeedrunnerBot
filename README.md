@@ -2,11 +2,17 @@
 #### "Speedrunner_Bot"
 A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API integration, written in Python.
 
+### Before reading this document!
+Since different people have different needs, there are two versions of this bot. Please decide which one you will want to use before continuing, and then download the appropriate folder before setting up the bot in [Step 3](#how-to-set-up-the-bot).  
+#### Version 1
+*A more complete Twitch.tv bot with speedrunner-specific functionality in addition to essential bot features, like simple text commands, uptime, and followage.*  
+This version of the bot is in the [bot]
+
 ## Index
 1. [What Can This Bot Do?](#what-can-this-bot-do)
 2. [Bot Commands](#bot-commands)
 3. [How to Set Up the Bot](#how-to-set-up-the-bot)
-4. [How to Run the Bot](#how-to-run-the-bot)
+4. [How to Run and Use the Bot](#how-to-run-and-use-the-bot)
 
 ## What Can This Bot Do?
 - Tell a user the world record for the game & category you are running
@@ -40,7 +46,7 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
 #### After creating a separate Twitch account for the bot to control, follow these steps:
 1. Install the latest version of Python 3 ([here](https://www.python.org/downloads/))
 2. Using **pip**, install the Python package *pytz*: `pip install pytz` or read more [here](https://pypi.org/project/pytz/)
-3. Download the contents of the [bot](/bot) folder to your comupter. In the *Settings.py* file, enter the required information in the following fields under `# Channel owner settings`:
+3. In the *Settings.py* file, enter the required information in the following fields under `# Channel owner settings`:
     - **CHANNEL**: *The channel owner's Twitch username.*
     - **CHANNELPASS**: *The oauth token for the channel owner's Twitch account — get one [here](https://twitchapps.com/tmi/) while logged into the channel owner's Twitch account.*
     - **GAMES**: *Add, as a Python list, the game(s) you speedrun to this list. If you only speedrun one game, it should be a list with only one list inside. For each game's list, the first element should be the name of the game exactly how you'd type it in your stream title. The second element should be the code for the game that Speedrun.com uses in the hyperlink for that game's page. For example, Banjo-Tooie is 'bt'*:  
@@ -54,8 +60,14 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
     - **PASS**: *the oauth token for the Twitch account that will be controlled by the bot — get one [here](https://twitchapps.com/tmi/) while logged into the bot's Twitch account*
     - **IDENT**: *the username of the Twitch account that will be controlled by the bot*
 
-## How to Run the Bot
-Run the *Run.py* file every time you stream and the bot will join your channel, ready to be used! 
+## How to Run and Use the Bot
+Run the *Run.py* file every time you stream and the bot will join your channel, ready to be used!  
+
+The speedrunning-specific features take your stream title into account. So, for the WR checker/PB checker/race link creator to work, please adhere to these guidelines when making your stream titles:
+- Write the game title exactly as you wrote it in the *Settings.py* file.
+- Write the category title exactly as you wrote it in the *Settings.py* file.
+- If you're doing a race, make sure "race with" is at the very end of your title, followed by your opponents' Twitch usernames separated by commas. For example: "Super Mario 64 70 Star Race With coolguy123, speedrunner456, streamerdude11". Do not use "and". Only commas.
+
   
 Note: *It is recommended that you make Speedrunner_Bot a moderator in your channel, so that it isn't accidentally timed out/banned/etc. by other bots and/or moderators.*
 
