@@ -1,9 +1,5 @@
 import string
 import time
-import datetime
-import pytz
-from pytz import timezone
-import random
 import urllib.request
 from urllib.request import urlopen
 from json import loads
@@ -11,168 +7,6 @@ from Socket import openSocket, sendMessage
 from Initialize import joinRoom
 from Read import getUser, getMessage
 from Settings import CHANNEL, COOLDOWN, IDENT, CHANNELPASS, SRC_USERNAME, GAMES, CATEGORIES
-
-
-#Basic command function
-def basicCommand(input, output):
-    if input == message.strip():
-        sendMessage(s, output)
-        cooldown()
-
-
-#Adds a text command to commands.txt
-def addCommand(input):
-    if input == message.lower().split()[0] and (user == CHANNEL or user in moderators) and user != IDENT:
-        a = open("commands.txt", "r")
-        commandList = a.readlines()
-        commandNames = []
-        for line in commandList:
-            commandNames.append(line.split()[0].lower().strip(";"))
-        a.close()
-        writeCommand = open("commands.txt", "a")
-        commandMessage = message
-        command = commandMessage.split(input, 1)[-1].strip()
-        try:
-            if command[0] == "!" and command.split()[0] not in commandNames:
-                writeCommand.write(command.split()[0] + "; " + command.split(' ', 1)[1] + "\n")
-                sendMessage(s, "Command " + command.split()[0] + " successfully added.")
-                writeCommand.close()
-                cooldown()
-            elif command.split()[0] in commandNames:
-                sendMessage(s, "Error: Command " + command.split()[0] + " already exists")
-                cooldown()
-                return
-            else:
-                sendMessage(s, "Error: Invalid syntax for the !add command. Correct syntax is: !add <command_name> <command_text>")
-                cooldown()
-        except IndexError as err:
-            sendMessage(s, "Error: Invalid syntax for the !add command. Correct syntax is: !add <command_name> <command_text>")
-            cooldown()
-    elif input == message.lower().split()[0]:
-        sendMessage(s, "@" + user.title() + " Only the channel owner and moderators may use the !add command.")
-        cooldown()
-
-
-#Deletes a specified command from commands.txt
-def deleteCommand(input):
-    if input == message.lower().split()[0] and user == CHANNEL:
-        a = open("commands.txt", "r")
-        commandList = a.readlines()
-        commandNames = []
-        for line in commandList:
-            commandNames.append(line.split()[0].lower().strip(";"))
-        a.close()
-
-        try:
-            command = message.split()[1].strip().lower()
-        except IndexError as err:
-            sendMessage(s, "Error: Invalid syntax for the !delete command. Correct syntax is: !delete <command_name>")
-            cooldown()
-            return
-
-        try:
-            message.split()[2]
-            if message.split()[2]:
-                sendMessage(s, "Error: Invalid syntax for the !delete command. Correct syntax is: !delete <command_name>")
-                cooldown()
-                return
-        except IndexError as err:
-            pass
-
-        if command in commandNames:
-            for commandLine in commandList:
-                if command == commandLine.split()[0].lower().strip(";"):
-                    commandList.remove(commandLine)
-            overwriteCommand = open("commands.txt", "w")
-            overwriteCommand.writelines(commandList)
-            overwriteCommand.close()
-            sendMessage(s, "Command {} successfully deleted.".format(command))
-            cooldown()
-        else:
-            sendMessage(s, "Error: Command {} not found".format(command))
-            cooldown()
-
-    elif input in message:
-        sendMessage(s, "@" + user.title() + " Only the channel owner may use the !delete command.")
-        cooldown()
-
-
-#Tells user how long they've been following the channel
-def followAge(input):
-    if input == message.lower().split()[0]:
-        messageSplit = message.lower().split()
-        try:
-            messageSplit[1]
-        except IndexError as err:
-            follower = user
-        else:
-            follower = messageSplit[1]
-
-        response = urlopen('http://api.newtimenow.com/follow-length/?channel={}&user={}'.format(CHANNEL, follower))
-        readable = response.read().decode('utf-8')
-        now = datetime.datetime.now()
-        try:
-            date = datetime.datetime.strptime(readable.split()[0], '%Y-%m-%d')
-        except ValueError as err:
-            sendMessage(s, follower.title() + " is not following " + CHANNEL.title() + ".")
-            return
-
-        age = now - date
-        age = str(age)
-        age_in_days = int(age.split()[0])
-        years = divmod(age_in_days, 365)
-        months = divmod(years[1], 30)
-        days = months[1]
-        if years[0] > 0:
-            sendMessage(s, follower.title() + " has been following " + CHANNEL.title() + " for " + str(years[0]) + " years, " + str(months[0]) + " months, " + str(days) + " days.")
-        elif months[0] > 0:
-            sendMessage(s, follower.title() + " has been following " + CHANNEL.title() + " for " + str(months[0]) + " months, " + str(days) + " days.")
-        else:
-            sendMessage(s, follower.title() + " has been following " + CHANNEL.title() + " for " + str(days) + " days.")
-
-        cooldown()
-
-
-#Returns the stream uptime
-def upTime(input):
-    if input == message.lower().strip():
-        #Get the uptime from the Twitch API
-        try:
-            response = urlopen('https://api.twitch.tv/kraken/streams/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
-        except urllib.error.HTTPError as err:
-            sendMessage(s, "Error: Invalid CHANNEL/CHANNELPASS in settings file")
-            cooldown()
-            return
-        readable = response.read().decode('utf-8')
-        stream_info = loads(readable)
-        stream = stream_info["stream"]
-
-        if stream == None:
-            sendMessage(s, CHANNEL.title() + " is not live.")
-            cooldown()
-            return
-        elif stream != None:
-            pass
-
-        createdAt = datetime.datetime.strptime(stream["created_at"][11:19], '%H:%M:%S').time()
-        now = datetime.datetime.now().time()
-        dateTimeCreatedAt = datetime.datetime.combine(datetime.date.today(), createdAt)
-        dateTimeCreatedAtUTC = timezone('UTC').localize(dateTimeCreatedAt)
-        dateTimeNow = datetime.datetime.combine(datetime.date.today(), now)
-        dateTimeNowEST = timezone('US/Eastern').localize(dateTimeNow)
-        dateTimeUptime = dateTimeNowEST - dateTimeCreatedAtUTC
-
-        uptime_hours = str(int(str(dateTimeUptime).split(':')[0]))
-        uptime_min = str(int(str(dateTimeUptime).split(':')[1]))
-
-        if int(uptime_hours) == 0:
-            sendMessage(s, CHANNEL.title() + " has been live for " + uptime_min + " minutes.")
-            cooldown()
-            return
-        elif int(uptime_hours) > 0:
-            sendMessage(s, CHANNEL.title() + " has been live for " + uptime_hours + " hours, " + uptime_min + " minutes.")
-            cooldown()
-            return
 
 
 #Returns the world record for the category that's written in the stream title
@@ -308,7 +142,7 @@ def personalBest(input):
             return
 
 
-#Returns a multitwitch.tv link with the channel owner and the other racers if a race is happening
+#Returns a kadgar.net link with the channel owner and the other racers if a race is happening
 def raceCommand(input):
     if input == message.lower().strip():
         #Get the stream title from the Twitch API
@@ -349,7 +183,7 @@ def raceCommand(input):
 #Displays commands
 def getCommands(input):
     if input == message.strip().lower():
-        sendMessage(s, 'Commands: !followage • !uptime • !wr • !pb • !race • '+' • '.join(listCommand))
+        sendMessage(s, 'Commands: !wr • !pb • !race')
         cooldown()
 
 
@@ -416,31 +250,10 @@ while True:
         vips = chatters['vips']
         viewers = chatters['viewers']
 
-        commands = {}
-        listCommand = []
-        commandFile = open("commands.txt", "r")
-        commandList = commandFile.readlines()
-        commandFile.close()
-        for command in commandList:
-            try:
-                commandInput, commandOutput = command.split(";")
-                commands[commandInput] = commandOutput
-            except ValueError as err:
-                sendMessage(s, "Error: Invalid command in commands file")
-                cooldown()
-
-        for input, output in commands.items():
-            basicCommand(input, output)
-            listCommand.append(input)
-
 
         getCommands('!commands')
-        addCommand('!add')
-        deleteCommand('!delete')
         worldRecord('!wr')
         personalBest('!pb')
         raceCommand('!race')
-        upTime('!uptime')
-        followAge('!followage')
         quitCommand('!kill')
         continue
