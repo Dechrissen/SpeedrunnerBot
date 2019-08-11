@@ -4,9 +4,17 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
 
 ### Before reading this document!
 Since different people have different needs, there are two versions of this bot. Please decide which one you will want to use before continuing, and then download the appropriate folder before setting up the bot in [Step 3](#how-to-set-up-the-bot).  
-#### Version 1
-*A more complete Twitch.tv bot with speedrunner-specific functionality in addition to essential bot features, like simple text commands, uptime, and followage.*  
-This version of the bot is in the [bot]
+
+**Version 1**
+*A more complete Twitch.tv bot with speedrunner-specific functionality in addition to essential bot features, like simple text commands, uptime, and followage. This bot is intended to replace other bots like Nightbot.*  
+
+Version 1 folder: [bot](/bot)
+  
+**Version 2**  
+
+*A version of the bot that has only speedrunner-specific functionality. This bot is intended to supplement bots like Nightbot.*  
+
+Version 2 folder: [bot_v2](/bot_v2)
 
 ## Index
 1. [What Can This Bot Do?](#what-can-this-bot-do)
@@ -45,7 +53,7 @@ This version of the bot is in the [bot]
 ## How to Set Up the Bot
 #### After creating a separate Twitch account for the bot to control, follow these steps:
 1. Install the latest version of Python 3 ([here](https://www.python.org/downloads/))
-2. Using **pip**, install the Python package *pytz*: `pip install pytz` or read more [here](https://pypi.org/project/pytz/)
+2. [Skip this step if using Version 2 of the bot] Using **pip**, install the Python package *pytz*: `pip install pytz` or read more [here](https://pypi.org/project/pytz/)
 3. In the *Settings.py* file, enter the required information in the following fields under `# Channel owner settings`:
     - **CHANNEL**: *The channel owner's Twitch username.*
     - **CHANNELPASS**: *The oauth token for the channel owner's Twitch account — get one [here](https://twitchapps.com/tmi/) while logged into the channel owner's Twitch account.*
