@@ -20,9 +20,12 @@ Version 2 folder: [bot_v2](/bot_v2)
 4. [How to Run and Use the Bot](#how-to-run-and-use-the-bot)
 
 ## What Can This Bot Do?
+Speedrunner-specific functions:
 - Tell a user the world record for the game & category you are running
 - Tell a user your personal best time for the game & category you are running
-- Create a [kadgar.net](http://kadgar.net) race link with you and other speedrunners (if you are currently racing)
+- Create a [kadgar.net](http://kadgar.net) race link with you and other speedrunners (if you are currently racing)  
+
+General bot functions:
 - Tell a user the stream uptime
 - Tell a user how long they have been following you
 - Add/delete basic text commands via Twitch chat
