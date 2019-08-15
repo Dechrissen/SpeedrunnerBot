@@ -13,7 +13,7 @@ def joinRoom(s):
         for line in temp:
             print(line)
             Loading = loadingComplete(line)
-    sendMessage(s, "/me has successfully connected.")
+    sendMessage(s, "[Connected]")
 
 def loadingComplete(line):
     if("End of /NAMES list" in line):
