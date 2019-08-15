@@ -377,7 +377,7 @@ def Console(line):
 #Quits the bot program
 def quitCommand(input):
     if input == message.strip().lower() and user == CHANNEL:
-        sendMessage(s, "/me has been disconnected.")
+        sendMessage(s, "[Disconnected]")
         quit()
     elif input == message.strip():
         sendMessage(s, "@" + user.title() + " Only the channel owner may use the !kill command.")
