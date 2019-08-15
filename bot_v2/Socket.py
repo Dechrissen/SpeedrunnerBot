@@ -11,6 +11,6 @@ def openSocket():
     return s
 
 def sendMessage(s, message):
-    messageTemp = "PRIVMSG #" + CHANNEL + " :" + message
+    messageTemp = "PRIVMSG #" + CHANNEL + " :" + "/me " + message
     s.send((messageTemp + "\r\n").encode())
     print("Sent: " + messageTemp)
