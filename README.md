@@ -51,7 +51,6 @@ General bot functions:
     - Quits the bot program.
     
 ## How to Set Up the Bot
-#### After creating a separate Twitch account for the bot to control, follow these steps:
 1. Install the latest version of Python 3 ([here](https://www.python.org/downloads/))
 2. [Skip this step if using Version 2 of the bot] Using **pip**, install the Python package *pytz*: `pip install pytz` or read more [here](https://pypi.org/project/pytz/)
 3. In the *Settings.py* file, enter the required information in the following fields under `# Channel owner settings`:
