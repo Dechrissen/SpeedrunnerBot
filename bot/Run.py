@@ -193,6 +193,7 @@ def worldRecord(input):
         for i in range(len(GAMES)):
             if GAMES[i][0].lower() in title:
                 game = GAMES[i][1]
+                platform = GAMES[i][3]
                 break
 
         category = None
@@ -209,7 +210,7 @@ def worldRecord(input):
             return
 
         if category != None:
-            response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=1&embed=players'.format(game, category))
+            response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=1&embed=players&platform={}'.format(game, category, platform))
             readable = response.read().decode('utf-8')
             lst = loads(readable)
             runner = lst['data']['players']['data'][0]['names']['international']
@@ -219,7 +220,7 @@ def worldRecord(input):
             seconds = minutes[1]
             wr = ''
             if hours[0] > 0:
-                wr = str(hours[0]) + " hours " + str(minutes[0]) + " min " + str(seconds) + " sec "
+                wr = str(hours[0]) + (" hour " if hours[0] == 1 else " hours ") + str(minutes[0]) + " min " + str(seconds) + " sec "
             elif minutes[0] > 0:
                 wr = str(minutes[0]) + " min " + str(seconds) + " sec "
             else:
@@ -227,12 +228,12 @@ def worldRecord(input):
 
             sendMessage(s, "The " + category_title + " world record is " + wr + "by " + runner + ".")
             cooldown()
+            return
 
         elif category == None:
             sendMessage(s, "No game and/or category detected in stream title.")
             cooldown()
             return
-
 
 #Returns the channel owner's personal best time for the category that's written in the stream title
 def personalBest(input):
@@ -247,62 +248,60 @@ def personalBest(input):
         readable = response.read().decode('utf-8')
         lst = loads(readable)
         title = lst['status'].lower()
-        game = None
 
+        game_title = None
         for i in range(len(GAMES)):
             if GAMES[i][0].lower() in title:
-                game = GAMES[i][1]
+                game_title = GAMES[i][0].lower()
+                platform_title = GAMES[i][2]
                 break
 
-        category = None
         category_title = None
         for i in range(len(CATEGORIES)):
             if CATEGORIES[i][0].lower() in title:
-                category = CATEGORIES[i][1]
                 category_title = CATEGORIES[i][0]
                 break
 
-        if game == None:
+        if game_title == None:
             sendMessage(s, "No game and/or category detected in stream title.")
             cooldown()
             return
 
-        if category != None:
-            response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?embed=players'.format(game, category))
+        if category_title != None:
+            response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=category,game,platform'.format(SRC_USERNAME))
             readable = response.read().decode('utf-8')
             lst = loads(readable)
 
-            place = 0
-            for name in lst['data']['players']['data']:
-                place = place + 1
-                try:
-                    name['names']
-                except KeyError as err:
-                    continue
-                if name['names']['international'].lower() == SRC_USERNAME:
+            place = None
+            time_in_sec = None
+            for cat in lst['data']:
+                if cat['category']['data']['name'] == category_title and cat['game']['data']['names']['international'].lower() == game_title and cat['platform']['data']['name'] == platform_name:
+                    time_in_sec = int(cat['run']['times']['realtime_t'])
+                    place = cat['place']
                     break
 
-            if place > len(lst['data']['players']['data']):
+            if place == None:
                 sendMessage(s, CHANNEL.title() + " currently has no " + category_title + " PB on the leaderboard.")
                 cooldown()
                 return
 
-            time_in_sec = int(lst['data']['runs'][place - 1]['run']['times']['realtime_t'])
+            ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(math.floor(n/10)%10!=1)*(n%10<4)*n%10::4])
+
             hours = divmod(time_in_sec, 3600)
             minutes = divmod(hours[1], 60)
             seconds = minutes[1]
             pb = ''
             if hours[0] > 0:
-                pb = str(hours[0]) + " hours " + str(minutes[0]) + " min " + str(seconds) + " sec"
+                pb = str(hours[0]) + (" hour " if hours[0] == 1 else " hours ") + str(minutes[0]) + " min " + str(seconds) + " sec"
             elif minutes[0] > 0:
                 pb = str(minutes[0]) + " min " + str(seconds) + " sec"
             else:
                 pb = str(seconds) + " sec"
 
-            sendMessage(s, CHANNEL.title() + "\'s " + category_title + " PB is " + pb + ".")
+            sendMessage(s, CHANNEL.title() + "\'s " + category_title + " PB is " + pb + " (" + ordinal(place) + " place).")
             cooldown()
 
-        elif category == None:
+        elif category_title == None:
             sendMessage(s, "No game and/or category detected in stream title.")
             cooldown()
             return
