@@ -1,5 +1,6 @@
 import string
 import time
+import math
 import urllib.request
 from urllib.request import urlopen
 from json import loads
@@ -109,7 +110,7 @@ def personalBest(input):
             place = None
             time_in_sec = None
             for cat in lst['data']:
-                if cat['category']['data']['name'] == category_title and cat['game']['data']['names']['international'].lower() == game_title and cat['platform']['data']['name'] == platform_name:
+                if cat['category']['data']['name'] == category_title and cat['game']['data']['names']['international'].lower() == game_title and cat['platform']['data']['name'] == platform_title:
                     time_in_sec = int(cat['run']['times']['realtime_t'])
                     place = cat['place']
                     break
