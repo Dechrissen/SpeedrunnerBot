@@ -58,7 +58,8 @@ General bot functions:
     - **CHANNEL**: *The channel owner's Twitch username.*
     - **CHANNELPASS**: *The oauth token for the channel owner's Twitch account — get one [here](https://twitchapps.com/tmi/) while logged into the channel owner's Twitch account.*
     - **GAMES**: *Add, as a Python list, the game(s) you speedrun to this list. If you only speedrun one game, it should be a list with only one list inside. For each game's list, the first element should be the name of the game exactly how you'd type it in your stream title. The second element should be the code for the game that Speedrun.com uses in the hyperlink for that game's page. For example, Banjo-Tooie is 'bt'*:  
-    ![game code example](images/game%20code.PNG)
+    ![game code example](images/game%20code.PNG)  
+    *The third element should be the platform that game is played on. For example, 'Nintendo 64'. The fourth element should be that platform's code as it's displayed on Speedrun.com. For example, Nintendo 64 is 'N64'.*
     - **CATEGORIES**: *Add, as a Python list, the categorie(s) of all the games you speedrun to this list. If you only run one category, it should be a list with only one list inside. For each category's list, the first element should be the name of the category exactly how you'd type it in your stream title. The second element should be the code for that category that Speedrun.com uses in the hyperlinks for that category. For example, Any% is usually 'Any' and 100% is usually '100'*:  
     ![category code example](images/category%20code.PNG)
      - **SRC_USERNAME**: *If your Speedrun.com username is different from your Twitch username, change this to your Speedrun.com username (within quotes and lowercase). Otherwise, leave this unchanged.*
