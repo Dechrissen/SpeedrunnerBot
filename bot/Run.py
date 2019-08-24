@@ -72,7 +72,16 @@ def worldRecord(input):
 
 #Returns the channel owner's personal best time for the category that's written in the stream title
 def personalBest(input):
-    if input == message.lower().strip():
+    if input == message.lower().split()[0]:
+        try:
+            message.split()[2]
+        except IndexError as err:
+            pass
+        else:
+            sendMessage(s, "Error: Invalid syntax for the !pb command. Correct syntax is: !pb [optional_user]")
+            cooldown()
+            return
+
         #Get the stream title from the Twitch API
         try:
             response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
@@ -102,8 +111,23 @@ def personalBest(input):
             cooldown()
             return
 
+        username = None
+        try:
+            message.split()[1]
+        except IndexError as err:
+            username = SRC_USERNAME
+        else:
+            username = message.split()[1]
+
+
         if category_title != None:
-            response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=category,game,platform'.format(SRC_USERNAME))
+            try:
+                response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=category,game,platform'.format(username))
+            except urllib.error.HTTPError as err:
+                sendMessage(s, "Error: Speedrun.com user not found")
+                cooldown()
+                return
+
             readable = response.read().decode('utf-8')
             lst = loads(readable)
 
@@ -116,7 +140,7 @@ def personalBest(input):
                     break
 
             if place == None:
-                sendMessage(s, CHANNEL.title() + " currently does not have a PB for " + category_title + " on the leaderboard.")
+                sendMessage(s, username.title() + " currently does not have a PB for " + category_title + " on the leaderboard.")
                 cooldown()
                 return
 
@@ -133,10 +157,54 @@ def personalBest(input):
             else:
                 pb = str(seconds) + " sec"
 
-            sendMessage(s, CHANNEL.title() + "\'s " + category_title + " PB is " + pb + " (" + ordinal(place) + " place).")
+            sendMessage(s, username.title() + "\'s " + category_title + " PB is " + pb + " (" + ordinal(place) + " place).")
             cooldown()
 
         elif category_title == None:
+            sendMessage(s, "No game and/or category detected in stream title.")
+            cooldown()
+            return
+        
+
+def leaderboard(input):
+    if input == message.lower().strip():
+        try:
+            response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        except urllib.error.HTTPError as err:
+            sendMessage(s, "Error: Invalid CHANNEL/CHANNELPASS in settings file")
+            cooldown()
+            return
+        readable = response.read().decode('utf-8')
+        lst = loads(readable)
+        title = lst['status'].lower()
+        game = None
+        game_title = None
+
+        for i in range(len(GAMES)):
+            if GAMES[i][0].lower() in title:
+                game = GAMES[i][1]
+                game_title = GAMES[i][0]
+                break
+
+        category = None
+        category_title = None
+        for i in range(len(CATEGORIES)):
+            if CATEGORIES[i][0].lower() in title:
+                category = CATEGORIES[i][1]
+                category_title = CATEGORIES[i][0]
+                break
+
+        if game == None:
+            sendMessage(s, "No game and/or category detected in stream title.")
+            cooldown()
+            return
+
+        if category != None:
+            sendMessage(s, game_title + " " + category_title + " Leaderboard: https://www.speedrun.com/{}#{}".format(game, category))
+            cooldown()
+            return
+
+        elif category == None:
             sendMessage(s, "No game and/or category detected in stream title.")
             cooldown()
             return
@@ -254,6 +322,7 @@ while True:
         getCommands('!commands')
         worldRecord('!wr')
         personalBest('!pb')
+        leaderboard('!leaderboard')
         raceCommand('!race')
         quitCommand('!kill')
         continue
