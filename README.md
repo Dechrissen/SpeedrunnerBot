@@ -2,17 +2,6 @@
 #### "Speedrunner_Bot"
 A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API integration, written in Python.
 
-### Before reading this document!
-Since different people have different needs, there are two versions of this bot. Please decide which one you will want to use before continuing, and then download the appropriate folder before setting up the bot in [Step 3](#how-to-set-up-the-bot).  
-
-**Version 1**: *A more complete Twitch.tv bot with speedrunner-specific functionality in addition to essential bot features, like simple text commands, uptime, and followage. This bot is intended to replace other bots like Nightbot.*  
-
-Version 1 folder: [bot](/bot)
-  
-**Version 2**: *A version of the bot that has only speedrunner-specific functionality. This bot is intended to supplement bots like Nightbot.*  
-
-Version 2 folder: [bot_v2](/bot_v2)
-
 ## Index
 1. [What Can This Bot Do?](#what-can-this-bot-do)
 2. [Bot Commands](#bot-commands)
@@ -20,31 +9,19 @@ Version 2 folder: [bot_v2](/bot_v2)
 4. [How to Run and Use the Bot](#how-to-run-and-use-the-bot)
 
 ## What Can This Bot Do?
-Speedrunner-specific functions:
 - Tell a user the world record for the game & category you are running
 - Tell a user your personal best time for the game & category you are running
-- Create a [kadgar.net](http://kadgar.net) race link with you and other speedrunners (if you are currently racing)  
-
-General bot functions:
-- Tell a user the stream uptime
-- Tell a user how long they have been following you
-- Add/delete basic text commands via Twitch chat
+- Create a [kadgar.net](http://kadgar.net) race link with you and other speedrunners (if you are currently racing) 
 
 ## Bot Commands
 - `!wr` (everyone)
     - Returns the world record (time and runner) for the game & category specified in your stream title. Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
 - `!pb` (everyone)
     - Returns your personal best (time and leaderboard standing) for the game & category specified in your stream title. Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
+- `!leaderboard` (everyone)
+    - Creates a [speedrun.com](https://www.speedrun.com/) link to the leaderboard for the game & category specified in your stream title.
 - `!race` (everyone)
     - Creates a [kadgar.net](http://kadgar.net) link with you and your opponents' streams (if you are currently racing).
-- `!uptime` (everyone)
-    - Returns the duration the stream has been live for. Data is taken from the Twitch API in realtime.
-- `!followage [optional_user]` (everyone)
-    - Returns the amount of time the user has been following the channel owner. If the optional argument is specified, it will return the follow age for that user instead. Data is taken from the [newtimenow.com](http://api.newtimenow.com/) API in realtime.
-- `!add <command_name> <command_text>` (channel owner & moderators only)
-    - Adds a simple text command to the commands file. Command names are case sensitive. Commands can also be added manually to the *commands.txt* file, following the semicolon-separated format shown in the sample command.
-- `!delete <command_name>` (channel owner only)
-    - Deletes the specified command from the commands file. Command names are case sensitive. Commands can also be deleted manually from the *commands.txt* file.
 - `!commands` (everyone)
     - Returns a list of bot commands.
 - `!kill` (channel owner only)
@@ -52,8 +29,7 @@ General bot functions:
     
 ## How to Set Up the Bot
 1. Install the latest version of Python 3 ([here](https://www.python.org/downloads/))
-2. [Skip this step if using Version 2 of the bot] Using **pip**, install the Python package *pytz*: `pip install pytz` or read more [here](https://pypi.org/project/pytz/)
-3. In the *Settings.py* file, enter the required information in the following fields under `# Channel owner settings`:
+2. In the *Settings.py* file, enter the required information in the following fields under `# Channel owner settings`:
     - **CHANNEL**: *The channel owner's Twitch username.*
     - **CHANNELPASS**: *The oauth token for the channel owner's Twitch account — get one [here](https://twitchapps.com/tmi/) while logged into the channel owner's Twitch account.*
     - **GAMES**: *Add, as a Python list, the game(s) you speedrun to this list. If you only speedrun one game, it should be a list with only one list inside. For each game's list, the first element should be the name of the game exactly how you'd type it in your stream title. The second element should be the code for the game that Speedrun.com uses in the hyperlink for that game's page. For example, Banjo-Tooie is 'bt'*:  
