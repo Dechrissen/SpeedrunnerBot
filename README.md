@@ -11,6 +11,7 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
 ## What Can This Bot Do?
 - Tell a user the world record for the game & category you are running
 - Tell a user your personal best time for the game & category you are running
+- Create a [speedrun.com](https://www.speedrun.com/) link to the leaderboard for the game & category you are running
 - Create a [kadgar.net](http://kadgar.net) race link with you and other speedrunners (if you are currently racing) 
 
 ## Bot Commands
