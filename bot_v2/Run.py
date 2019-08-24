@@ -84,10 +84,10 @@ def personalBest(input):
         lst = loads(readable)
         title = lst['status'].lower()
 
-        game_title = None
+        game = None
         for i in range(len(GAMES)):
             if GAMES[i][0].lower() in title:
-                game_title = GAMES[i][0].lower()
+                game = GAMES[i][1].lower()
                 platform_title = GAMES[i][2]
                 break
 
@@ -97,7 +97,7 @@ def personalBest(input):
                 category_title = CATEGORIES[i][0]
                 break
 
-        if game_title == None:
+        if game == None:
             sendMessage(s, "No game and/or category detected in stream title.")
             cooldown()
             return
@@ -110,13 +110,13 @@ def personalBest(input):
             place = None
             time_in_sec = None
             for cat in lst['data']:
-                if cat['category']['data']['name'] == category_title and cat['game']['data']['names']['international'].lower() == game_title and cat['platform']['data']['name'] == platform_title:
+                if cat['category']['data']['name'] == category_title and cat['game']['data']['abbreviation'].lower() == game and cat['platform']['data']['name'] == platform_title:
                     time_in_sec = int(cat['run']['times']['realtime_t'])
                     place = cat['place']
                     break
 
             if place == None:
-                sendMessage(s, CHANNEL.title() + " currently has no " + category_title + " PB on the leaderboard.")
+                sendMessage(s, CHANNEL.title() + " currently does not have a PB for " + category_title + " on the leaderboard.")
                 cooldown()
                 return
 
