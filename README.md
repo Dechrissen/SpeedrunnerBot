@@ -17,7 +17,7 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
 ## Bot Commands
 - `!wr [optional_category]` (everyone)
     - Returns the world record (time and runner) for the game & category specified in your stream title (or, the specified category). Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
-- `!pb [optional _user]` (everyone)
+- `!pb [optional_user]` (everyone)
     - Returns your personal best (or, the personal best of a specified user) for the game & category specified in your stream title. Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
 - `!leaderboard` (everyone)
     - Creates a [speedrun.com](https://www.speedrun.com/) link to the leaderboard for the game & category specified in your stream title.
