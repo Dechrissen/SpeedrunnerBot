@@ -51,7 +51,7 @@ Run the *Run.py* file every time you stream and the bot will join your channel, 
 The speedrunning-specific features take your stream title into account. So, for the WR checker/PB checker/race link creator to work, please adhere to these guidelines when making your stream titles:
 - Write the game title exactly as you wrote it in the *Settings.py* file.
 - Write the category title exactly as you wrote it in the *Settings.py* file.
-- If you're doing a race, make sure "race with" is at the very end of your title, followed by your opponents' Twitch usernames separated by commas. For example: "Banjo-Tooie Any% Race With coolguy123, speedrunner456, streamerdude11". Do not use "and". Only commas.
+- If you're doing a race, make sure "race with" is at the very end of your title, followed by your opponents' Twitch usernames separated by commas. For example: "Banjo-Tooie Any% Race with coolguy123, speedrunner456, streamerdude11". Do not use "and". Only commas.
 
   
 Note: *It is recommended that you make Speedrunner_Bot a moderator in your channel, so that it isn't accidentally timed out/banned/etc. by other bots and/or moderators.*
