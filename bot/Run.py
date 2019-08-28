@@ -12,7 +12,16 @@ from Settings import CHANNEL, COOLDOWN, IDENT, CHANNELPASS, SRC_USERNAME, GAMES,
 
 #Returns the world record for the category that's written in the stream title
 def worldRecord(input):
-    if input == message.lower().strip():
+    if input == message.lower().split()[0].strip():
+        #Check to see if an argument is specified first
+        argument = False
+        try:
+            message.lower().split()[1]
+        except IndexError as err:
+            pass
+        else:
+            argument = True
+
         #Get the stream title from the Twitch API
         try:
             response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
@@ -33,11 +42,25 @@ def worldRecord(input):
 
         category = None
         category_title = None
-        for i in range(len(CATEGORIES)):
-            if CATEGORIES[i][0].lower() in title:
-                category = CATEGORIES[i][1]
-                category_title = CATEGORIES[i][0]
-                break
+
+        #Check again to see if an argument was specified
+        if argument == False:
+            for i in range(len(CATEGORIES)):
+                if CATEGORIES[i][0].lower() in title:
+                    category = CATEGORIES[i][1]
+                    category_title = CATEGORIES[i][0]
+                    break
+        elif argument == True:
+            specified_category = message.lower().split(input, 1)[-1].strip()
+            for i in range(len(CATEGORIES)):
+                if specified_category == CATEGORIES[i][0].lower():
+                    category_title = CATEGORIES[i][0]
+                    category = CATEGORIES[i][1]
+                    break
+            if category == None:
+                sendMessage(s, "Error: Invalid category specified")
+                cooldown()
+                return
 
         if game == None:
             sendMessage(s, "No game and/or category detected in stream title.")
@@ -55,11 +78,11 @@ def worldRecord(input):
             seconds = minutes[1]
             wr = ''
             if hours[0] > 0:
-                wr = str(hours[0]) + (" hour " if hours[0] == 1 else " hours ") + str(minutes[0]) + " min " + str(seconds) + " sec "
+                wr = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s "
             elif minutes[0] > 0:
-                wr = str(minutes[0]) + " min " + str(seconds) + " sec "
+                wr = str(minutes[0]) + "m " + str(seconds) + "s "
             else:
-                wr = str(seconds) + " sec "
+                wr = str(seconds) + "s "
 
             sendMessage(s, "The " + category_title + " world record is " + wr + "by " + runner + ".")
             cooldown()
