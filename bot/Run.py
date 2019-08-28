@@ -523,7 +523,7 @@ def raceCommand(input):
 #Displays commands
 def getCommands(input):
     if input == message.strip().lower():
-        sendMessage(s, 'Commands: !wr • !pb • !race')
+        sendMessage(s, 'Commands: !wr • !2nd • !3rd • !4th • !pb • !leaderboard • !race')
         cooldown()
 
 
