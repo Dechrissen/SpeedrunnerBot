@@ -10,6 +10,7 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
 
 ## What Can This Bot Do?
 - Tell a user the world record for the game & category you are running
+- Tell a user the second, third, or fourth place time for the game & category you are running
 - Tell a user your personal best time for the game & category you are running
 - Create a [speedrun.com](https://www.speedrun.com/) link to the leaderboard for the game & category you are running
 - Create a [kadgar.net](http://kadgar.net) race link with you and other speedrunners (if you are currently racing) 
@@ -17,6 +18,12 @@ A basic bot for Twitch.tv with speedrunner-specific functionality and Speedrun.c
 ## Bot Commands
 - `!wr [optional_category]` (everyone)
     - Returns the world record (time and runner) for the game & category specified in your stream title (or, the specified category). Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
+- `!2nd [optional_category]` (everyone)
+    - Returns the 2nd place time and runner for the game & category specified in your stream title (or, the specified category). Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
+- `!3rd [optional_category]` (everyone)
+    - Returns the third place time and runner for the game & category specified in your stream title (or, the specified category). Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
+- `!4th [optional_category]` (everyone)
+    - Returns the fourth place time and runner for the game & category specified in your stream title (or, the specified category). Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
 - `!pb [optional_user]` (everyone)
     - Returns your personal best (or, the personal best of a specified user) for the game & category specified in your stream title. Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
 - `!leaderboard` (everyone)
