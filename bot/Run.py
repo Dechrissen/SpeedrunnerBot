@@ -93,6 +93,255 @@ def worldRecord(input):
             cooldown()
             return
 
+
+def second(input):
+    if input == message.lower().split()[0].strip():
+        #Check to see if an argument is specified first
+        argument = False
+        try:
+            message.lower().split()[1]
+        except IndexError as err:
+            pass
+        else:
+            argument = True
+
+        #Get the stream title from the Twitch API
+        try:
+            response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        except urllib.error.HTTPError as err:
+            sendMessage(s, "Error: Invalid CHANNEL/CHANNELPASS in settings file")
+            cooldown()
+            return
+        readable = response.read().decode('utf-8')
+        lst = loads(readable)
+        title = lst['status'].lower()
+        game = None
+
+        for i in range(len(GAMES)):
+            if GAMES[i][0].lower() in title:
+                game = GAMES[i][1]
+                platform = GAMES[i][3]
+                break
+
+        category = None
+        category_title = None
+
+        #Check again to see if an argument was specified
+        if argument == False:
+            for i in range(len(CATEGORIES)):
+                if CATEGORIES[i][0].lower() in title:
+                    category = CATEGORIES[i][1]
+                    category_title = CATEGORIES[i][0]
+                    break
+        elif argument == True:
+            specified_category = message.lower().split(input, 1)[-1].strip()
+            for i in range(len(CATEGORIES)):
+                if specified_category == CATEGORIES[i][0].lower():
+                    category_title = CATEGORIES[i][0]
+                    category = CATEGORIES[i][1]
+                    break
+            if category == None:
+                sendMessage(s, "Error: Invalid category specified")
+                cooldown()
+                return
+
+        if game == None:
+            sendMessage(s, "No game and/or category detected in stream title.")
+            cooldown()
+            return
+
+        if category != None:
+            response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=2&embed=players&platform={}'.format(game, category, platform))
+            readable = response.read().decode('utf-8')
+            lst = loads(readable)
+            runner = lst['data']['players']['data'][1]['names']['international']
+            time_in_sec = int(lst['data']['runs'][1]['run']['times']['realtime_t'])
+            hours = divmod(time_in_sec, 3600)
+            minutes = divmod(hours[1], 60)
+            seconds = minutes[1]
+            place2nd = ''
+            if hours[0] > 0:
+                place2nd = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s "
+            elif minutes[0] > 0:
+                place2nd = str(minutes[0]) + "m " + str(seconds) + "s "
+            else:
+                place2nd = str(seconds) + "s "
+
+            sendMessage(s, "The 2nd place time for " + category_title + " is " + place2nd + "by " + runner + ".")
+            cooldown()
+            return
+
+        elif category == None:
+            sendMessage(s, "No game and/or category detected in stream title.")
+            cooldown()
+            return
+
+
+def third(input):
+    if input == message.lower().split()[0].strip():
+        #Check to see if an argument is specified first
+        argument = False
+        try:
+            message.lower().split()[1]
+        except IndexError as err:
+            pass
+        else:
+            argument = True
+
+        #Get the stream title from the Twitch API
+        try:
+            response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        except urllib.error.HTTPError as err:
+            sendMessage(s, "Error: Invalid CHANNEL/CHANNELPASS in settings file")
+            cooldown()
+            return
+        readable = response.read().decode('utf-8')
+        lst = loads(readable)
+        title = lst['status'].lower()
+        game = None
+
+        for i in range(len(GAMES)):
+            if GAMES[i][0].lower() in title:
+                game = GAMES[i][1]
+                platform = GAMES[i][3]
+                break
+
+        category = None
+        category_title = None
+
+        #Check again to see if an argument was specified
+        if argument == False:
+            for i in range(len(CATEGORIES)):
+                if CATEGORIES[i][0].lower() in title:
+                    category = CATEGORIES[i][1]
+                    category_title = CATEGORIES[i][0]
+                    break
+        elif argument == True:
+            specified_category = message.lower().split(input, 1)[-1].strip()
+            for i in range(len(CATEGORIES)):
+                if specified_category == CATEGORIES[i][0].lower():
+                    category_title = CATEGORIES[i][0]
+                    category = CATEGORIES[i][1]
+                    break
+            if category == None:
+                sendMessage(s, "Error: Invalid category specified")
+                cooldown()
+                return
+
+        if game == None:
+            sendMessage(s, "No game and/or category detected in stream title.")
+            cooldown()
+            return
+
+        if category != None:
+            response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=3&embed=players&platform={}'.format(game, category, platform))
+            readable = response.read().decode('utf-8')
+            lst = loads(readable)
+            runner = lst['data']['players']['data'][2]['names']['international']
+            time_in_sec = int(lst['data']['runs'][2]['run']['times']['realtime_t'])
+            hours = divmod(time_in_sec, 3600)
+            minutes = divmod(hours[1], 60)
+            seconds = minutes[1]
+            place3rd = ''
+            if hours[0] > 0:
+                place3rd = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s "
+            elif minutes[0] > 0:
+                place3rd = str(minutes[0]) + "m " + str(seconds) + "s "
+            else:
+                place3rd = str(seconds) + "s "
+
+            sendMessage(s, "The 3rd place time for " + category_title + " is " + place3rd + "by " + runner + ".")
+            cooldown()
+            return
+
+        elif category == None:
+            sendMessage(s, "No game and/or category detected in stream title.")
+            cooldown()
+            return
+
+
+def fourth(input):
+    if input == message.lower().split()[0].strip():
+        #Check to see if an argument is specified first
+        argument = False
+        try:
+            message.lower().split()[1]
+        except IndexError as err:
+            pass
+        else:
+            argument = True
+
+        #Get the stream title from the Twitch API
+        try:
+            response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        except urllib.error.HTTPError as err:
+            sendMessage(s, "Error: Invalid CHANNEL/CHANNELPASS in settings file")
+            cooldown()
+            return
+        readable = response.read().decode('utf-8')
+        lst = loads(readable)
+        title = lst['status'].lower()
+        game = None
+
+        for i in range(len(GAMES)):
+            if GAMES[i][0].lower() in title:
+                game = GAMES[i][1]
+                platform = GAMES[i][3]
+                break
+
+        category = None
+        category_title = None
+
+        #Check again to see if an argument was specified
+        if argument == False:
+            for i in range(len(CATEGORIES)):
+                if CATEGORIES[i][0].lower() in title:
+                    category = CATEGORIES[i][1]
+                    category_title = CATEGORIES[i][0]
+                    break
+        elif argument == True:
+            specified_category = message.lower().split(input, 1)[-1].strip()
+            for i in range(len(CATEGORIES)):
+                if specified_category == CATEGORIES[i][0].lower():
+                    category_title = CATEGORIES[i][0]
+                    category = CATEGORIES[i][1]
+                    break
+            if category == None:
+                sendMessage(s, "Error: Invalid category specified")
+                cooldown()
+                return
+
+        if game == None:
+            sendMessage(s, "No game and/or category detected in stream title.")
+            cooldown()
+            return
+
+        if category != None:
+            response = urlopen('https://www.speedrun.com/api/v1/leaderboards/{}/category/{}?top=4&embed=players&platform={}'.format(game, category, platform))
+            readable = response.read().decode('utf-8')
+            lst = loads(readable)
+            runner = lst['data']['players']['data'][3]['names']['international']
+            time_in_sec = int(lst['data']['runs'][3]['run']['times']['realtime_t'])
+            hours = divmod(time_in_sec, 3600)
+            minutes = divmod(hours[1], 60)
+            seconds = minutes[1]
+            place4th = ''
+            if hours[0] > 0:
+                place4th = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s "
+            elif minutes[0] > 0:
+                place4th = str(minutes[0]) + "m " + str(seconds) + "s "
+            else:
+                place4th = str(seconds) + "s "
+
+            sendMessage(s, "The 4th place time for " + category_title + " is " + place4th + "by " + runner + ".")
+            cooldown()
+            return
+
+        elif category == None:
+            sendMessage(s, "No game and/or category detected in stream title.")
+            cooldown()
+            return
+
 #Returns the channel owner's personal best time for the category that's written in the stream title
 def personalBest(input):
     if input == message.lower().split()[0]:
@@ -174,11 +423,11 @@ def personalBest(input):
             seconds = minutes[1]
             pb = ''
             if hours[0] > 0:
-                pb = str(hours[0]) + (" hour " if hours[0] == 1 else " hours ") + str(minutes[0]) + " min " + str(seconds) + " sec"
+                pb = str(hours[0]) + "h " + str(minutes[0]) + "m " + str(seconds) + "s"
             elif minutes[0] > 0:
-                pb = str(minutes[0]) + " min " + str(seconds) + " sec"
+                pb = str(minutes[0]) + "m " + str(seconds) + "s"
             else:
-                pb = str(seconds) + " sec"
+                pb = str(seconds) + "s"
 
             sendMessage(s, username.title() + "\'s " + category_title + " PB is " + pb + " (" + ordinal(place) + " place).")
             cooldown()
