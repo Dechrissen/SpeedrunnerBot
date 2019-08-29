@@ -593,6 +593,9 @@ while True:
 
         getCommands('!commands')
         worldRecord('!wr')
+        second('!2nd')
+        third('!3rd')
+        fourth('!4th')
         personalBest('!pb')
         leaderboard('!leaderboard')
         raceCommand('!race')
