@@ -406,7 +406,7 @@ def personalBest(input):
             place = None
             time_in_sec = None
             for cat in lst['data']:
-                if cat['category']['data']['name'] == category_title and cat['game']['data']['abbreviation'].lower() == game and cat['platform']['data']['name'] == platform_title:
+                if cat['category']['data']['name'].lower() == category_title.lower() and cat['game']['data']['abbreviation'].lower() == game and cat['platform']['data']['name'] == platform_title:
                     time_in_sec = int(cat['run']['times']['realtime_t'])
                     place = cat['place']
                     break
