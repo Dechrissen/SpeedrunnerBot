@@ -516,7 +516,7 @@ def raceCommand(input):
                 break
 
 
-        sendMessage(s, "Race link: http://kadgar.net/live" + CHANNEL + "/" + "/".join(contenders))
+        sendMessage(s, "Race link: http://kadgar.net/live/" + CHANNEL + "/".join(contenders))
         cooldown()
 
 
