@@ -25,8 +25,8 @@ A bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API
     - Returns the third place time and runner for the game & category specified in your stream title (or, the specified category). Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
 - `!4th [optional_category]` (everyone)
     - Returns the fourth place time and runner for the game & category specified in your stream title (or, the specified category). Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
-- `!pb [optional_user]` (everyone)
-    - Returns your personal best (or, the personal best of a specified user) for the game & category specified in your stream title. Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
+- `!pb [optional_user] [optional_category]` (everyone)
+    - Returns your personal best (or, the personal best of a specified user) for the game & category specified in your stream title (or, the specified category). Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
 - `!leaderboard` (everyone)
     - Creates a [speedrun.com](https://www.speedrun.com/) link to the leaderboard for the game & category specified in your stream title.
 - `!race` (everyone)
