@@ -345,14 +345,13 @@ def fourth(input):
 #Returns the channel owner's personal best time for the category that's written in the stream title
 def personalBest(input):
     if input == message.lower().split()[0]:
+        category_specified = False
         try:
             message.split()[2]
         except IndexError as err:
             pass
         else:
-            sendMessage(s, "Error: Invalid syntax for the !pb command. Correct syntax is: !pb [optional_user]")
-            cooldown()
-            return
+            category_specified = True
 
         #Get the stream title from the Twitch API
         try:
@@ -373,10 +372,26 @@ def personalBest(input):
                 break
 
         category_title = None
-        for i in range(len(CATEGORIES)):
-            if CATEGORIES[i][0].lower() in title:
-                category_title = CATEGORIES[i][0]
-                break
+        if category_specified == True:
+            category_title = message.lower().strip('!pb ')
+            first_word = category_title.lower().split()[0]
+            category_title = category_title.split(first_word, 1)[-1].strip()
+            check = False
+            for i in range(len(CATEGORIES)):
+                if CATEGORIES[i][0].lower() == category_title:
+                    check = True
+                    category_title = CATEGORIES[i][0]
+                    break
+            if check == False:
+                sendMessage(s, "Error: Invalid category specified")
+                cooldown()
+                return
+
+        elif category_specified == False:
+            for i in range(len(CATEGORIES)):
+                if CATEGORIES[i][0].lower() in title:
+                    category_title = CATEGORIES[i][0]
+                    break
 
         if game == None:
             sendMessage(s, "No game and/or category detected in stream title.")
