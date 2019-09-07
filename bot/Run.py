@@ -452,6 +452,81 @@ def personalBest(input):
             cooldown()
             return
         
+        
+#Tells user the leaderboard standing of the channel owner, or a specified user
+def place(input):
+    if input == message.lower().split()[0]:
+        username = None
+        try:
+            message.split()[1]
+        except IndexError as err:
+            username = SRC_USERNAME
+        else:
+            username = message.split()[1]
+
+        #Get the stream title from the Twitch API
+        try:
+            response = urlopen('https://api.twitch.tv/kraken/channels/{}?oauth_token={}'.format(CHANNEL, CHANNELPASS.strip('oauth:')))
+        except urllib.error.HTTPError as err:
+            sendMessage(s, "Error: Invalid CHANNEL/CHANNELPASS in settings file")
+            cooldown()
+            return
+        readable = response.read().decode('utf-8')
+        lst = loads(readable)
+        title = lst['status'].lower()
+
+        game = None
+        for i in range(len(GAMES)):
+            if GAMES[i][0].lower() in title:
+                game = GAMES[i][1].lower()
+                platform_title = GAMES[i][2]
+                break
+
+        if game == None:
+            sendMessage(s, "No game and/or category detected in stream title.")
+            cooldown()
+            return
+
+        category_title = None
+        for i in range(len(CATEGORIES)):
+            if CATEGORIES[i][0].lower() in title:
+                category_title = CATEGORIES[i][0]
+                break
+
+        if category_title != None:
+            try:
+                response = urlopen('https://www.speedrun.com/api/v1/users/{}/personal-bests?embed=category,game,platform'.format(username))
+            except urllib.error.HTTPError as err:
+                sendMessage(s, "Error: Speedrun.com user not found")
+                cooldown()
+                return
+
+            readable = response.read().decode('utf-8')
+            lst = loads(readable)
+
+            place = None
+            time_in_sec = None
+            for cat in lst['data']:
+                if cat['category']['data']['name'].lower() == category_title.lower() and cat['game']['data']['abbreviation'].lower() == game and cat['platform']['data']['name'] == platform_title:
+                    time_in_sec = int(cat['run']['times']['realtime_t'])
+                    place = cat['place']
+                    break
+
+            if place == None:
+                sendMessage(s, username.title() + " currently does not have a PB for " + category_title + " on the leaderboard.")
+                cooldown()
+                return
+
+            ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(math.floor(n/10)%10!=1)*(n%10<4)*n%10::4])
+
+            sendMessage(s, username.title() + " is in " + ordinal(place) + " place for " + category_title + ".")
+
+        elif category_title == None:
+            sendMessage(s, "No game and/or category detected in stream title.")
+            cooldown()
+            return
+
+        
 
 def leaderboard(input):
     if input == message.lower().strip():
@@ -612,6 +687,7 @@ while True:
         third('!3rd')
         fourth('!4th')
         personalBest('!pb')
+        place('!place')
         leaderboard('!leaderboard')
         raceCommand('!race')
         quitCommand('!kill')
