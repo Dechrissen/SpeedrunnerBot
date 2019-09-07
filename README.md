@@ -13,6 +13,7 @@ A bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API
 - Tell a user the second, third, or fourth place time for the game & category you are running (or, a specified category)
 - Tell a user your personal best time for the game & category you are running
 - Tell a user the personal best time of a specified Speedrun.com user for the game & category you are running
+- Tell a user the leaderboard standing of the channel owner for the current category, or the leaderboard standing of a specified user
 - Create a Speedrun.com link to the leaderboard for the game & category you are running
 - Create a kadgar.net race link with you and other speedrunners (if you are currently racing) 
 
@@ -27,6 +28,8 @@ A bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API
     - Returns the fourth place time and runner for the game & category specified in your stream title (or, the specified category). Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
 - `!pb [optional_user] [optional_category]` (everyone)
     - Returns your personal best (or, the personal best of a specified user) for the game & category specified in your stream title (or, the specified category). Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
+- `!place [optional_user]` (everyone)
+    - Returns the leaderboard standing of the channel owner for the category in your stream title, or the leaderboard standing of the specified user. Data is taken from the [speedrun.com](https://www.speedrun.com/) API in realtime.
 - `!leaderboard` (everyone)
     - Creates a [speedrun.com](https://www.speedrun.com/) link to the leaderboard for the game & category specified in your stream title.
 - `!race` (everyone)
