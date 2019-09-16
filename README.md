@@ -1,5 +1,4 @@
 # Twitch.tv Speedrunner Bot
-#### "Speedrunner_Bot" on Twitch
 A bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API integration, written in Python.
 
 ## Index
@@ -66,7 +65,7 @@ The speedrunning-specific features take your stream title into account. So, for 
 - If you're doing a race, make sure "race with" is in your title, followed by your opponents' Twitch usernames separated by commas. For example: "Banjo-Tooie Any% Race with coolguy123, speedrunner456, streamerdude11". Do not use "and". Only commas.
 
   
-Note: *It is recommended that you make Speedrunner_Bot a moderator in your channel, so that it isn't accidentally timed out/banned/etc. by other bots and/or moderators.*
+Note: *It is recommended that you make the bot a moderator in your channel, so that it isn't accidentally timed out/banned/etc. by other bots and/or moderators.*
 
 ## To Do List
 - [ ] Add a GUI to run the bot from a single .exe, add dropdown lists for settings, etc.
