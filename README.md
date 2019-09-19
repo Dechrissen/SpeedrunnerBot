@@ -1,3 +1,4 @@
+*Note*: This is an old version. I don't think I'll be updating this bot anymore, but it still works. Version 2 of this bot is [here](https://github.com/Dechrissen/speedrunb0t).
 # Twitch.tv Speedrunner Bot
 A bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API integration, written in Python.
 
