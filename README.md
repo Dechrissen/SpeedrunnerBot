@@ -52,7 +52,6 @@ A bot for Twitch.tv with speedrunner-specific functionality and Speedrun.com API
     ![category code example](images/category%20code.PNG)
      - **SRC_USERNAME**: *If your Speedrun.com username is different from your Twitch username, change this to your Speedrun.com username (within quotes and lowercase). Otherwise, leave this unchanged.*
 
-### [Optional] If you want the bot to control a Twitch account other than Speedrunner_Bot:
 3. In the *Settings.py* file, also edit these two fields under `# Bot account settings`:
     - **PASS**: *the oauth token for the Twitch account that will be controlled by the bot — get one [here](https://twitchapps.com/tmi/) while logged into the bot's Twitch account*
     - **IDENT**: *the username of the Twitch account that will be controlled by the bot*
