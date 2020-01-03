@@ -70,4 +70,4 @@ Note: *It is recommended that you make the bot a moderator in your channel, so t
 
 ## To Do List
 - [ ] Add a GUI to run the bot from a single .exe, add dropdown lists for settings, etc.
-- [ ] Host the bot online as opposed to locally
+- [x] Host the bot online as opposed to locally
